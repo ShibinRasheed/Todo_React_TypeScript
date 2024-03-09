@@ -6,19 +6,19 @@ const btn = document.querySelector("#btn");
 
 const mode = document.querySelector("#mode")
 
-btn.innerText = "Lighten";
+btn.innerText = "Darken";
     mode.classList.remove("overlay");
 
 btn.addEventListener("click",()=>{
   console.log('cli');
   if(mode.classList[0] == "overlay")
   {
-    btn.innerText = "Lighten";
+    btn.innerText = "Darken";
     mode.classList.remove("overlay");
   }
   else
   {
-    btn.innerText = "Darken";
+    btn.innerText = "Lighten";
     mode.classList.add("overlay");
   }
  
