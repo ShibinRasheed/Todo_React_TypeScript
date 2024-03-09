@@ -17,6 +17,22 @@ body{
   height: 333px; 
 }
 
+#mode{
+  width: 500px;
+  height: 333px;
+  position: absolute;
+}
+.overlay{
+  background-color: rgba(0,0,0,0.5);
+  
+}
+
+#btn{
+  position:absolute;
+  background-color: rgba(255, 255, 255, 0.277);
+  border: 1px black solid;
+}
+
 #mainPic{
   width: 100%;
   height :auto;
