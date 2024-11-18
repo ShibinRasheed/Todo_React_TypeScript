@@ -1,19 +1,26 @@
 import { useState } from "react";
 
 export default function App() {
-  const [items, setItems] = useState<string[]>([]);
+
+    type Item = {
+      id : string;
+      title : string;
+    }
+
+
+  const [items, setItems] = useState<Item[]>([]);
 
   const [inputValue, setInputValue] = useState<string>("");
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     console.log("submited");
-    setItems((prev) => [...prev, inputValue]);
+    setItems((prev) => [...prev, {title : inputValue, id : Date.now().toString() }]);
     setInputValue("");
   };
 
-  const handleDelete = (value:string) => {
-    setItems(list => list.filter(data => data !== value))
+  const handleDelete = (id:string) => {
+    setItems(list => list.filter(data => data.id !== id))
   }
 
   return (
@@ -35,11 +42,11 @@ export default function App() {
       <div>
         {items.map((data, index) => {
           return (
-            <div key={`${data} = ${index}`} className="flex gap-4 border border-white py-2 px-5 justify-between" >
+            <div key={`${data.id} = ${index}`} className="flex gap-4 border border-white py-2 px-5 justify-between" >
               <p  className="">
-                {data}
+                {data.title}
               </p>
-              <button className="bg-red-500 rounded text-white px-2 " onClick={()=>handleDelete(data)} >x</button>
+              <button className="bg-red-500 rounded text-white px-2 " onClick={()=>handleDelete(data.id)} >x</button>
             </div>
           );
         })}
