@@ -1,35 +1,34 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+
+  const [items , setItems] = useState<string[]>([]);
+
+  const [inputValue, setInputValue] = useState<string>("");
+
+  const handleSubmit = (event : React.FormEvent) => {
+    event.preventDefault();
+    console.log("submited")
+    setItems(prev => [...prev,inputValue]);
+    setInputValue("");
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className="bg-slate-800 p-10 flex flex-col items-center  text-white w-full h-screen">
+      <h1>Todo List</h1>
 
-export default App
+       <form onSubmit={handleSubmit} className="flex flex-col p-10 gap-5">
+        <input type="text" className="text-black" value={inputValue} onChange={(e) => setInputValue(e.target.value)}></input>
+         <button className="bg-black rounded-md py-2" type="submit">Submit</button>
+      </form>
+
+      <div>
+        {items.map((data, index)=> {
+          return(
+            <p key={`${data} = ${index}`} className="">{data}</p>
+          )
+        })}
+      </div>
+    </div>
+  );
+}
